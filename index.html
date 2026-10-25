@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special annaaa ❤️</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .bg-hearts { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; pointer-events: none; }
+        .bg-hearts span {
+            position: absolute; display: block; width: 20px; height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            animation: animate 25s linear infinite;
+            bottom: -150px; transform: rotate(45deg);
+        }
+        .bg-hearts span::before, .bg-hearts span::after {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            background: rgba(255, 255, 255, 0.3); border-radius: 50%;
+        }
+        .bg-hearts span::before { top: -10px; left: 0; }
+        .bg-hearts span::after { top: 0; left: -10px; }
+        @keyframes animate {
+            0% { transform: translateY(0) rotate(45deg); opacity: 1; border-radius: 0; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+        }
+        .card-container {
+            position: relative; z-index: 10;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 40px 30px; border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center; max-width: 420px; width: 90%;
+        }
+        .step { display: none; animation: fadeIn 0.6s ease forwards; }
+        .step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        h1 { font-size: 26px; color: #d63384; margin-bottom: 15px; font-weight: 700; }
+        p { color: #555; font-size: 15px; margin-bottom: 25px; line-height: 1.6; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-size: 13px; color: #666; margin-bottom: 6px; font-weight: 500; }
+        input {
+            width: 100%; padding: 12px 16px; border: 2px solid #ffccd5;
+            border-radius: 12px; font-size: 14px; outline: none;
+            font-family: 'Poppins', sans-serif; background: #fff;
+        }
+        input:focus { border-color: #d63384; }
+        .btn {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white; border: none; padding: 12px 28px; font-size: 15px;
+            font-weight: 600; border-radius: 50px; cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 65, 108, 0.4); width: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+        .letter-box {
+            font-family: 'Dancing Script', cursive; font-size: 26px; color: #333;
+            min-height: 140px; margin-bottom: 25px; padding: 15px;
+            background: rgba(255, 240, 245, 0.6); border-radius: 12px;
+            border: 1px dashed #ffb3c6; display: flex; align-items: center;
+            justify-content: center; text-align: center;
+        }
+        .btn-container { display: flex; gap: 15px; justify-content: center; align-items: center; position: relative; min-height: 60px; margin-top: 10px; }
+        .btn-yes { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); flex: 1; }
+        .btn-no { background: #e0e0e0; color: #666; flex: 1; position: relative; }
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; text-decoration: none;
+        }
+        .heart-icon { font-size: 50px; color: #ff416c; margin-bottom: 15px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body>
+    <div class="bg-hearts" id="bgHearts"></div>
+    <div class="card-container">
+        <div class="step active" id="step1">
+            <div class="heart-icon"><i class="fa-solid fa-heart"></i></div>
+            <h1>Buat Spesial Seseorang</h1>
+            <p>Masukkan nama panggilan dia dan nomor WhatsApp kamu agar dia bisa langsung membalasnya!</p>
+            <div class="input-group">
+                <label>Nama Panggilan Gebetan</label>
+                <input type="text" id="targetName" placeholder="Contoh: Sayang / Nabila">
+            </div>
+            <div class="input-group">
+                <label>Nomor WhatsApp Kamu (Pengirim)</label>
+                <input type="text" id="myPhone" placeholder="Contoh: 628123456789 (Tanpa +)">
+            </div>
+            <button class="btn" onclick="nextStep(2)">Mulai Beri Kejutan ❤️</button>
+        </div>
+        <div class="step" id="step2">
+            <h1>Untuk <span id="displayName" style="color:#ff416c;">Kamu</span> ✨</h1>
+            <div class="letter-box" id="typewriterText"></div>
+            <button class="btn" onclick="nextStep(3)">Lanjutkan Membaca 💌</button>
+        </div>
+        <div class="step" id="step3">
+            <div class="heart-icon"><i class="fa-solid fa-face-kiss-wink-heart"></i></div>
+            <h1><span id="displayName2">Kamu</span>, mau kah kamu jadi pacar aku?</h1>
+            <p>Jawab dengan jujur ya, tidak boleh menolak! 🤭</p>
+            <div class="btn-container">
+                <button class="btn btn-yes" id="btnYes" onclick="acceptLove()">Mau Banget! ❤️</button>
+                <button class="btn btn-no" id="btnNo" onmouseover="moveButton()" onclick="moveButton()">Enggak 😜</button>
+            </div>
+        </div>
+        <div class="step" id="step4">
+            <div class="heart-icon"><i class="fa-solid fa-gift"></i></div>
+            <h1>Yeay! Resmi Jadian! 🎉</h1>
+            <p>Terima kasih sudah memilih aku. Klik tombol di bawah untuk kirim pesan konfirmasi ke WhatsApp aku ya!</p>
+            <a id="waLink" href="#" target="_blank" class="btn btn-whatsapp">
+                <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> Kabari di WhatsApp
+            </a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        const bgHearts = document.getElementById('bgHearts');
+        for (let i = 0; i < 15; i++) {
+            const span = document.createElement('span');
+            span.style.left = Math.random() * 100 + '%';
+            span.style.top = (Math.random() * 20 + 80) + '%';
+            span.style.width = (Math.random() * 20 + 10) + 'px';
+            span.style.height = span.style.width;
+            span.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            span.style.animationDelay = (Math.random() * 5) + 's';
+            bgHearts.appendChild(span);
+        }
+        let partnerName = "", whatsappNumber = "", yesButtonScale = 1;
+        function nextStep(stepNumber) {
+            if (stepNumber === 2) {
+                const nameInput = document.getElementById('targetName').value.trim();
+                const phoneInput = document.getElementById('myPhone').value.trim();
+                if (!nameInput) { alert('Tolong masukkan nama panggilan gebetan kamu!'); return; }
+                if (!phoneInput) { alert('Tolong masukkan nomor WhatsApp kamu!'); return; }
+                partnerName = nameInput;
+                whatsappNumber = phoneInput.replace(/[^0-9]/g, '');
+                document.getElementById('displayName').innerText = partnerName;
+                document.getElementById('displayName2').innerText = partnerName;
+                switchStep(2);
+                startTypewriter();
+            } else if (stepNumber === 3) { switchStep(3); }
+        }
+        function switchStep(stepNum) {
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + stepNum).classList.add('active');
+        }
+        const letterContent = "Hai kamu... Sejak pertama kali kita dekat, ada perasaan beda yang selalu bikin aku senyum sendiri. Hari ini, aku mau jujur sama perasaan aku...";
+        let charIndex = 0;
+        function startTypewriter() {
+            const container = document.getElementById('typewriterText');
+            container.innerHTML = ""; charIndex = 0;
+            function type() {
+                if (charIndex < letterContent.length) {
+                    container.innerHTML += letterContent.charAt(charIndex);
+                    charIndex++; setTimeout(type, 45);
+                }
+            }
+            type();
+        }
+        function moveButton() {
+            const btnNo = document.getElementById('btnNo');
+            const btnYes = document.getElementById('btnYes');
+            const x = (Math.random() - 0.5) * 160;
+            const y = (Math.random() - 0.5) * 80;
+            btnNo.style.transform = `translate(${x}px, ${y}px)`;
+            yesButtonScale += 0.12;
+            btnYes.style.transform = `scale(${yesButtonScale})`;
+        }
+        function acceptLove() {
+            switchStep(4);
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            const encodedMessage = encodeURIComponent(`Halo! Aku mau kok jadi pacar kamu ❤️🥰`);
+            document.getElementById('waLink').href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+        }
+    </script>
+</body>
+</html>
